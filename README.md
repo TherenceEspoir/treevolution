@@ -8,8 +8,8 @@ Python package for forest evolution.
 
 ## Resources
 
-- Course link: [https://jeromebuisine.fr/teaching/#2022---2023](https://jeromebuisine.fr/teaching/#2022---2023)
-- Google Sheet link: [add your project information here](https://docs.google.com/spreadsheets/d/1wV-RaQ01r4oX9JfSzolSzC5ofiqHg1Z9QQdq1BO-Q-E/edit?usp=sharing)
+- Course link: [https://jeromebuisine.fr/teaching/#2023---2024](https://jeromebuisine.fr/teaching/#2023---2024)
+- Google Sheet link: [add your project information here](https://docs.google.com/spreadsheets/d/1xf7LQNiBoHZfaF7jK0HH1mBZsTCs2RTuqb3lEnR4LDE/edit?usp=sharing)
 
 ## Application overview
 
