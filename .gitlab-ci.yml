@@ -6,4 +6,7 @@ image: python:3.8-slim-buster
 build:
   stage: build
   script:
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
     - python -m build
+    - pip install -e .
