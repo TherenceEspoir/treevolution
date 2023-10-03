@@ -13,10 +13,10 @@ build:
   script:
     - pip install --upgrade pip
     - python -m build
-    - pip install -e .
+    
 
 test:
   stage: test
   script:
-    - pytest
+    - pip install -e .
     - pytest --cov=src/treevolution
