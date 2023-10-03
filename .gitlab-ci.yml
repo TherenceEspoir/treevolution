@@ -20,3 +20,4 @@ test:
   script:
     - pip install -e .
     - pytest --cov=src/treevolution
+    - sphinx-build -b html docs/source/ docs/build
