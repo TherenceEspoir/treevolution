@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "treevolution"
 version = "0.0.1"
 authors = [
-  { name="Prénom Nom", email="prenom.nom@etu.univ-littoral.fr" },
+  { name="Espoir Houedji", email="espoir.houedji@etu.univ-littoral.fr" },
 ]
 description = "Tree simulator engine"
 readme = "README.md"
