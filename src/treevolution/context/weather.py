@@ -2,7 +2,7 @@
 Module with classes for weather management of each day
 """
 import random
-
+import datetime
 class Season():
     """
     Season class with only utils methods
