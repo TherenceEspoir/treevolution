@@ -17,6 +17,6 @@ Python package for forest evolution.
 <img src="resources/treevolution_app.png"  width="60%">
 </center>
 
-## Web site overview
+## Web site overvieww
 
 ![](resources/web_application.png)
