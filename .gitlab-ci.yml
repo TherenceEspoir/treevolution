@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - deploy
 
 image: python:3.8-slim-buster
 
@@ -20,4 +21,18 @@ test:
   script:
     - pip install -e .
     - pytest --cov=src/treevolution
-    - sphinx-build -b html docs/source/ docs/build
+
+pages:
+  stage: deploy
+  script:
+    - pip install -e .
+    - sphinx-build -b html docs/source/ public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_REF_NAME== $CI_DEFAULT_BRANCH
+      when: always
+
+ 
+
