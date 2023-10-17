@@ -24,6 +24,7 @@ test:
   script:
     - pip install -e .
     - pytest --cov=src/treevolution
+    - pytest --junitxml=report.xml
 
 pages:
   stage: deploy
