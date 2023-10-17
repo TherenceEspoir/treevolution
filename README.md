@@ -20,3 +20,7 @@ Python package for forest evolution.
 ## Web site overvieww
 
 ![](resources/web_application.png)
+
+#BADGE
+
+[![Lines of Code](https://diran.univ-littoral.fr/api/project_badges/measure?project=treevolution-ehouedji&metric=ncloc&token=sqb_ed650ddc20d82d8f4fd40e91f1c6a545a71131eb)](https://diran.univ-littoral.fr/dashboard?id=treevolution-ehouedji)

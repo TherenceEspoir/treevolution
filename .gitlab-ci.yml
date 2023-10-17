@@ -24,6 +24,7 @@ test:
   script:
     - pip install -e .
     - pytest --cov=src/treevolution
+    - pytest --junitxml=report.xml
 
 pages:
   stage: deploy
@@ -65,7 +66,11 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script:
+    - pip install -e .
+    - pytest -v -o junit_family=xunit1 --cov=src --cov-report xml:tests/coverage.xml --junitxml=tests/nosetests.xml
+    - pylint --exit-zero --disable=C0303,R0902 --output pylint-report.txt src
     - sonar-scanner -Dsonar.qualitygate.wait=true
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME == 'master' || $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_REF_NAME == 'develop' || $CI_PIPELINE_SOURCE == 'merge_request_event'
+
