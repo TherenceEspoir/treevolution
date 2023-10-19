@@ -26,6 +26,7 @@ test:
     - pytest --cov=src/treevolution
     - pytest --junitxml=report.xml
   coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'  
+  
 
 pages:
   stage: deploy
