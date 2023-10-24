@@ -13,16 +13,33 @@ class Oak(Tree):
 
     #methode evolve qui fait évoluer l’arbre en fonction de sa taille max 
 
-    @property
-    def evolve(self):
+    
+    def evolve(self,context):
         """
         Method evolve
         """
+
         if self._height < self.MAX_HEIGHT:
             self._height += 0.005
 
+        
 
+    @property
+    def health(self):
+        """
+        Method health
+        """
+        return self._nutrient
 
+    #la largeur du tronc est quand à elle définie par : height* 0.08
+    @property
+    def width(self):
+        """
+        Method width
+        """
+        return self._height * 0.08
+
+   
 
 
             

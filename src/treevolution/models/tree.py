@@ -15,6 +15,7 @@ class Tree():
         self._birth = birth
         self._world = world
         self._specie = self.__class__.__name__
+        #self._specie = self._type.__name__
         self._height = 0
         self._nutrient = 100
         self._fallen = False
@@ -44,6 +45,7 @@ class Tree():
         Getter for height
         """
         return self._height
+    
 
     @height.setter
     def height(self, height):
