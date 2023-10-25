@@ -1,4 +1,5 @@
 
+# BEGIN: 7d4f5a3d5c8a
 from abc import abstractmethod
 
 
@@ -6,7 +7,6 @@ class Tree():
     """
     Tree class in order to represent a tree
     """
-
     def __init__(self, coordinate, birth, world):
         """
         Constructor of Tree class
@@ -22,6 +22,62 @@ class Tree():
         self._max_age = None
         self._days_in_humus = None
 
+    @property
+    def coordinate(self):
+        """
+        Getter for coordinate
+        """
+        return self._coordinate
+    
+    @property
+    def birth(self):
+        """
+        Getter for birth
+        """
+        return self._birth
+    
+    @property
+    def world(self):
+        """
+        Getter for world
+        """
+        return self._world
+    
+    @property
+    def specie(self):
+        """
+        Getter for specie
+        """
+        return self._specie
+    
+    @property
+    def age(self):
+        """
+        Getter for age
+        """
+        return self._age
+    
+    @property
+    def max_age(self):
+        """
+        Getter for max_age
+        """
+        return self._max_age
+    
+    @property
+    def days_in_humus(self):
+        """
+        Getter for days_in_humus
+        """
+        return self._days_in_humus
+    
+    @property
+    def nutrient(self):
+        """
+        Getter for nutrient
+        """
+        return self._nutrient
+    
 
     @property
     def fallen(self):
@@ -31,7 +87,7 @@ class Tree():
         return self._fallen
 
     @fallen.setter
-    def fallen(self, fallen):
+    def setFallen(self, fallen):
         """
         Setter for fallen
         """
@@ -46,7 +102,7 @@ class Tree():
     
 
     @height.setter
-    def height(self, height):
+    def setHeight(self, height):
         """
         Setter for height
         """
@@ -86,6 +142,7 @@ class Tree():
         Method __str__
         """
         return f"{self._specie} : {self._height}m, {self._age} years old, {self._nutrient} health, fallen : {self._fallen}" 
+
 
        
 

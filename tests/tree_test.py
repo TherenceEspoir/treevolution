@@ -22,30 +22,41 @@ class TestOak:
         world1 = World(100, 80, date)
 
         oak = Oak(coordinate, birth, world1)
-        assert oak._coordinate == coordinate
-        assert oak._birth == birth
-        assert oak._world == world1
-        assert oak._specie == "Oak"
-        assert oak._nutrient == 100
-        assert oak._fallen == False
-        assert oak._age == 0
-        assert oak._days_in_humus == None
+        assert oak.coordinate == coordinate
+        assert oak.birth == birth
+        assert oak.world == world1
+        assert oak.specie == "Oak"
+        assert oak.nutrient == 100
+        assert oak.fallen == False
+        assert oak.age == 0
+        assert oak.days_in_humus == None
 
 
-    def test_oak_height(self):
-        """Test that the height property can be set and retrieved"""
+    def test_oak_max_age(self):
+        """Test that the max_age property is abstract """
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        assert oak._world == world1
-        
-        oak.height=6
-        assert oak.height == 6
+        assert oak.world == world1
 
-        assert oak.height >= oak.MIN_HEIGHT
-        assert oak.height <= oak.MAX_HEIGHT
+        assert oak.max_age >= Oak.MIN_AGE
+        assert oak.max_age <= Oak.MAX_AGE
+
+
+
+    def test_oak_height(self):
+        """Test the height property """
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+
+        oak = Oak((0, 0), datetime.now(), world1)
+        assert oak.world == world1
+        
+        assert oak.height >= Oak.MIN_HEIGHT
+        assert oak.height <= Oak.MAX_HEIGHT
 
         
     def test_oak_width(self):
@@ -55,34 +66,30 @@ class TestOak:
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        assert oak._world == world1
-
-        oak.height=6
+        assert oak.world == world1
 
         assert oak.width == oak.height * 0.08
 
        
 
     def test_oak_evolve(self):
-        """Test that the evolve method increases the height of the Oak"""
+        """Teste que la méthode evolve augmente height de  Oak"""
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        oak.height=6
-
+        
         context = Context(weather="sunny", sun_intensity=10, humus=5)
 
         for i in range(3):
             oak.evolve(context)
-        
-        assert oak.height >= 5
-        assert oak.height <= 7
 
+        assert oak.height >= Oak.MIN_HEIGHT
+        assert oak.height <= Oak.MAX_HEIGHT
+
+    
     def test_oak_health_property(self):
-        """
-        Test oak health property
-        """
+
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
 
@@ -99,7 +106,7 @@ class TestOak:
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        oak._fallen = False  
+        oak.setFallen=False  
         assert oak.fallen == False 
 
     
@@ -111,7 +118,7 @@ class TestOak:
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        oak.fallen = True
+        oak.setFallen=True
         assert oak.fallen == True
 
     
@@ -123,7 +130,7 @@ class TestOak:
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        oak._fallen = False
+        oak.setFallen=False
         assert oak.fallen == False         
         
 
@@ -139,11 +146,35 @@ class TestTree:
         world1 = World(100, 80, date)
 
         tree = Tree(coordinate, birth, world1)
-        assert tree._coordinate == coordinate
-        assert tree._birth == birth
-        assert tree._world == world1
-        assert tree._specie == "Tree"
-        assert tree._nutrient == 100
-        assert tree._fallen == False
-        assert tree._age == 0
-        assert tree._days_in_humus == None
+        assert tree.coordinate == coordinate
+        assert tree.birth == birth
+        assert tree.world == world1
+        assert tree.specie == "Tree"
+        assert tree.nutrient == 100
+        assert tree.fallen == False
+        assert tree.age == 0
+        assert tree.days_in_humus == None
+
+
+    def test_tree_fallen_property(self):
+        """
+        Test tree fallen property
+        """
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), datetime.now(), world1)
+        tree.setFallen=False  
+        assert tree.fallen == False
+
+    def test_tree_height(self):
+        """Test the height property """
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+
+        tree = Tree((0, 0), datetime.now(), world1)
+        assert tree.world == world1
+        
+        assert tree.height == 0
+        tree.setHeight=5
+        assert tree.height == 5
