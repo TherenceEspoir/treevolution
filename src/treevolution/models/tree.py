@@ -15,14 +15,12 @@ class Tree():
         self._birth = birth
         self._world = world
         self._specie = self.__class__.__name__
-        #self._specie = self._type.__name__
         self._height = 0
         self._nutrient = 100
         self._fallen = False
         self._age = 0
         self._max_age = None
         self._days_in_humus = None
-
 
 
     @property
@@ -82,7 +80,12 @@ class Tree():
         pass
 
 
-
+    #méthode __str__ pour proposer l’affichage d’une instance de la classe
+    def __str__(self):
+        """
+        Method __str__
+        """
+        return f"{self._specie} : {self._height}m, {self._age} years old, {self._nutrient} health, fallen : {self._fallen}" 
 
        
 
