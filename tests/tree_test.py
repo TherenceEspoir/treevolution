@@ -33,7 +33,7 @@ class TestOak:
 
 
     def test_oak_max_age(self):
-        """Test that the max_age property is abstract """
+        """Test the max_age property"""
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
@@ -60,7 +60,7 @@ class TestOak:
 
         
     def test_oak_width(self):
-        """Test that the width property is abstract """
+        """Test width property"""
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
@@ -156,17 +156,18 @@ class TestTree:
         assert tree.days_in_humus == None
 
 
-    def test_tree_fallen_property(self):
+    def test_fallen_property(self):
         """
         Test tree fallen property
         """
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
         tree = Tree((0, 0), datetime.now(), world1)
-        tree.setFallen=False  
         assert tree.fallen == False
+        tree.setFallen=True  
+        assert tree.fallen == True
 
-    def test_tree_height(self):
+    def test_height(self):
         """Test the height property """
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
@@ -178,3 +179,73 @@ class TestTree:
         assert tree.height == 0
         tree.setHeight=5
         assert tree.height == 5
+
+    def test_birth(self):
+        """Test the birth property """
+
+        birth = datetime.now()
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+        assert tree.birth == birth
+
+    def test_world(self):
+        """Test the world property """
+
+        birth = datetime.now()
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+        assert tree.world == world1    
+
+    def test_nutrient(self):
+        """Test the nutrient property """
+
+        birth = datetime.now()
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+        assert tree.nutrient == 100
+
+    def test_age(self):
+        """Test the age property """
+
+        birth = datetime.now()
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+        assert tree.age == 0    
+
+    def test_days_in_humus(self):
+        """Test the days_in_humus property """
+
+        birth = datetime.now()
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+        assert tree.days_in_humus == None
+
+    def test_specie(self):
+        """Test the specie property """
+
+        birth = datetime.now()
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+        assert tree.specie == "Tree"
+
+    def test_max_age(self):
+        """Test the max_age property """
+
+        birth = datetime.now()
+
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+        assert tree.max_age == None    
