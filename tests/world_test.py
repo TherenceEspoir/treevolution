@@ -8,7 +8,8 @@ from treevolution.world import World
 class TestWorld:
     """TestWordl class in order to test World behavior
     """
-#Tester le constructeur
+
+    #Tester le constructeur
     def test_world(self):
         """Test the constructor method of World
         """
@@ -22,7 +23,7 @@ class TestWorld:
 
 
 
-#Tester la méthode step
+    #Tester la méthode step
     def test_step(self):
         """Test the step method of World
         """
@@ -33,8 +34,3 @@ class TestWorld:
         world1.step()
          
         assert world1.date == date + timedelta(days=1)
-    
-
-
-
- 
