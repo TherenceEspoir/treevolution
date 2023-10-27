@@ -1,4 +1,5 @@
 import random
+import secrets
 from treevolution.models.tree import Tree
 
 class Oak(Tree):
@@ -11,8 +12,10 @@ class Oak(Tree):
 
     def __init__(self, coordinate, birth, world):
         super().__init__(coordinate, birth, world)
-        self._max_age = random.randint(Oak.MIN_AGE, Oak.MAX_AGE)
-        self._height = random.randint(Oak.MIN_HEIGHT, Oak.MAX_HEIGHT) 
+        
+        self._max_age = secrets.randbelow(Oak.MAX_AGE - Oak.MIN_AGE) + Oak.MIN_AGE
+
+        self._height = secrets.randbelow(Oak.MAX_HEIGHT - Oak.MIN_HEIGHT) + Oak.MIN_HEIGHT
 
     
     def evolve(self,context):
