@@ -1,7 +1,8 @@
-
-# BEGIN: 7d4f5a3d5c8a
 from abc import abstractmethod
-
+from datetime import timedelta, datetime
+from dateutil.relativedelta import relativedelta
+from treevolution.context import Context
+from treevolution.models import state
 
 class Tree():
     """
@@ -21,6 +22,17 @@ class Tree():
         self._age = 0
         self._max_age = None
         self._days_in_humus = None
+
+
+    @property
+    def state(self):
+        """
+        Method property state
+        """
+        if self.age >= self.max_age:
+            return state.TreeState.HUMUS
+        else:
+            return state.TreeState.TREE
 
     @property
     def coordinate(self):
@@ -125,18 +137,18 @@ class Tree():
         """
         pass
     
-    #methode abstraite evolve
-    #cette méthode prend en paramètre un contexte d’environnement (définit dans context.context)
-
     @abstractmethod
-    def evolve(self, context):
+    def evolve(self,context: Context):
         """
         Abstract method evolve
         """
-        pass
+        self._age = relativedelta(datetime.now() ,self._birth).years
 
+        if self.state == state.TreeState.HUMUS:
+            self.setFallen = True
+            return
 
-    #méthode __str__ pour proposer l’affichage d’une instance de la classe
+        
     def __str__(self):
         """
         Method __str__

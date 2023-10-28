@@ -3,6 +3,8 @@ Define all evolution state
 """
 from enum import Enum
 
+from treevolution.models.tree import Tree
+
 class SeedState(Enum):
     """
     Define the different state of seed

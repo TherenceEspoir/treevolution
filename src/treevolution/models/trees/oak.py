@@ -22,6 +22,7 @@ class Oak(Tree):
         """
         Method evolve qui fait évoluer l’arbre en fonction de sa taille max
         """
+        super().evolve(context)
         if self.height < self.MAX_HEIGHT:
             self.setHeight=self.height+0.005
 
