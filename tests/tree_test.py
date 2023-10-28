@@ -3,6 +3,8 @@ Test class for Tree and Oak class
 """
 from abc import ABC, abstractmethod
 from datetime import timedelta, datetime
+from treevolution.models import state
+
 
 from treevolution.models.tree import Tree
 from treevolution.context import Context
@@ -32,7 +34,7 @@ class TestOak:
         assert oak.days_in_humus == None
 
 
-    def test_oak_max_age(self):
+    def test_max_age(self):
         """Test the max_age property"""
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
@@ -46,7 +48,7 @@ class TestOak:
 
 
 
-    def test_oak_height(self):
+    def test_height(self):
         """Test the height property """
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
@@ -59,7 +61,7 @@ class TestOak:
         assert oak.height <= Oak.MAX_HEIGHT
 
         
-    def test_oak_width(self):
+    def test_width(self):
         """Test width property"""
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
@@ -72,14 +74,14 @@ class TestOak:
 
        
 
-    def test_oak_evolve(self):
+    def test_evolve(self):
         """Teste que la méthode evolve augmente height de  Oak"""
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
         
-        context = Context(weather="sunny", sun_intensity=10, humus=5)
+        context = Context(weather="sunny", sun_intensity=10, humus=1)
 
         for i in range(3):
             oak.evolve(context)
@@ -88,7 +90,7 @@ class TestOak:
         assert oak.height <= Oak.MAX_HEIGHT
 
     
-    def test_oak_health_property(self):
+    def test_health(self):
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
@@ -98,7 +100,7 @@ class TestOak:
         assert oak.health == 100  
 
     
-    def test_oak_fallen_property(self):
+    def test_fallen(self):
         """
         Test oak fallen property
         """
@@ -248,4 +250,19 @@ class TestTree:
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
         tree = Tree((0, 0), birth, world1)
-        assert tree.max_age == None    
+        assert tree.max_age == None
+
+    def test_evolve(self):
+        birth = datetime(2015,1,1)
+        
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+
+        context = Context(weather="sunny", sun_intensity=10, humus=1)
+        tree._max_age=5
+        tree._age=0
+
+        tree.evolve(context)
+        assert tree.state == state.TreeState.HUMUS
+        assert tree.fallen == True
