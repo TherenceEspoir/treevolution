@@ -1,14 +1,22 @@
+import random
+from typing import List
+from treevolution.models.tree import Tree
+from treevolution.context import Context
+from datetime import timedelta, datetime
+from datetime import date
+from dateutil.relativedelta import relativedelta
+
 import datetime
 """
 Module which contains World class
 """
 
+LIST_OF_TREE : List[Tree]= []
+
 class World():
     """
     World class in order to represent the forest and simulate the evolution of trees
     """
-
-
     def __init__(self, height, width, start_date):
         """
         Constructor of World class
@@ -16,17 +24,35 @@ class World():
         self._height = height
         self._width = width
         self._start_date = start_date
-
-
-#methode step qui avance la date d'un jour
+        self._list_of_tree: List[Tree] = []
 
     def step(self):
         """
-        Method qui avance la date d'un jour
+        Method qui avance la date d'un jour et simule l'ensemble des arbres
         """
-        self._start_date = self._start_date + datetime.timedelta(days=1)
+        self._start_date = self._start_date + timedelta(days=1)
 
-#methode date qui retourne la date courante
+        random.seed(42)
+        weather_options = ["ensoleillé", "nuageux", "pluvieux", "neige", "orage"]
+
+        weather = random.choice(weather_options)
+
+        context = Context(weather,None,10)
+
+        for tree in self._list_of_tree:
+            tree.evolve(context)
+            tree._age= relativedelta(self._start_date ,tree._birth).years
+
+        
+        self._weather = weather
+        return (self._start_date, weather, self._list_of_tree)
+        
+        
+    def state(self):
+        """
+        Method qui retourne l'état du monde sans simuler
+        """
+        return (datetime.now(), self._height,self._width, self._list_of_tree)
     
     @property
     def date(self):
@@ -49,3 +75,9 @@ class World():
         """
         return self._width
         
+    
+    def add_tree(self, tree):
+        """
+        Method qui ajoute un arbre à cette liste des arbres connus
+        """
+        self._list_of_tree.append(tree)

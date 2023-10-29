@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime,date
 from dateutil.relativedelta import relativedelta
 from treevolution.context import Context
 from treevolution.models import state
@@ -148,17 +148,9 @@ class Tree():
             self.setFallen = True
             return
 
-        
     def __str__(self):
         """
         Method __str__
         """
-        return f"{self._specie} : {self._height}m, {self._age} years old, {self._nutrient} health, fallen : {self._fallen}" 
-
-
-       
-
-
-
-
+        return f"-- (name : {self.specie}, height : {self.height}, width : {self.width}, coordinate : {self.coordinate.__str__()}, health : {self.health},nutrient : {self.nutrient}, age : {self.age}, max_age : {self.max_age}, humus_day : {self.days_in_humus} )"
     
