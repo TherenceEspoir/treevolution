@@ -14,7 +14,6 @@ class Oak(Tree):
         super().__init__(coordinate, birth, world)
         
         self._max_age = secrets.randbelow(Oak.MAX_AGE - Oak.MIN_AGE) + Oak.MIN_AGE
-
         self._height = secrets.randbelow(Oak.MAX_HEIGHT - Oak.MIN_HEIGHT) + Oak.MIN_HEIGHT
         
     
