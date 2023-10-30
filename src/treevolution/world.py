@@ -11,8 +11,6 @@ import datetime
 Module which contains World class
 """
 
-LIST_OF_TREE : List[Tree]= []
-
 class World():
     """
     World class in order to represent the forest and simulate the evolution of trees
@@ -25,6 +23,11 @@ class World():
         self._width = width
         self._start_date = start_date
         self._list_of_tree: List[Tree] = []
+
+    
+    @property
+    def list_of_tree(self):
+        return self._list_of_tree
 
     def step(self):
         """
@@ -45,14 +48,14 @@ class World():
 
         
         self._weather = weather
-        return (self._start_date, weather, self._list_of_tree)
+        return (self._start_date, weather, self.list_of_tree)
         
         
     def state(self):
         """
         Method qui retourne l'état du monde sans simuler
         """
-        return (datetime.now(), self._height,self._width, self._list_of_tree)
+        return (datetime.now(), self._height,self._width, self.list_of_tree)
     
     @property
     def date(self):

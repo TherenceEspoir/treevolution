@@ -69,6 +69,13 @@ class Tree():
         """
         return self._age
     
+    @age.setter
+    def age(self, age):
+        """
+        Setter for age
+        """
+        self._age = age
+    
     @property
     def max_age(self):
         """
@@ -98,8 +105,9 @@ class Tree():
         """
         return self._fallen
 
+    
     @fallen.setter
-    def setFallen(self, fallen):
+    def fallen(self, fallen):
         """
         Setter for fallen
         """
@@ -114,13 +122,13 @@ class Tree():
     
 
     @height.setter
-    def setHeight(self, height):
+    def height(self, height):
         """
         Setter for height
         """
         self._height = height         
 
-    #property abstraites heath qui déterminera en fonction de plusieurs critères propres à l’espèce l’état de santé de l’arbre
+    #property abstraite heath qui déterminera en fonction de plusieurs critères propres à l’espèce l’état de santé de l’arbre
     @property
     @abstractmethod
     def health(self):
@@ -142,10 +150,10 @@ class Tree():
         """
         Abstract method evolve
         """
-        self._age = relativedelta(datetime.now() ,self._birth).years
+        self.age = relativedelta(datetime.now() ,self._birth).years
 
         if self.state == state.TreeState.HUMUS:
-            self.setFallen = True
+            self.fallen = True
             return
 
     def __str__(self):

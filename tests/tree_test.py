@@ -108,7 +108,7 @@ class TestOak:
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        oak.setFallen=False  
+        oak.fallen=False  
         assert oak.fallen == False 
 
     
@@ -120,7 +120,7 @@ class TestOak:
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        oak.setFallen=True
+        oak.fallen=True
         assert oak.fallen == True
 
     
@@ -132,7 +132,7 @@ class TestOak:
         world1 = World(100, 80, date)
 
         oak = Oak((0, 0), datetime.now(), world1)
-        oak.setFallen=False
+        oak.fallen=False
         assert oak.fallen == False         
         
 
@@ -166,7 +166,7 @@ class TestTree:
         world1 = World(100, 80, date)
         tree = Tree((0, 0), datetime.now(), world1)
         assert tree.fallen == False
-        tree.setFallen=True  
+        tree.fallen=True  
         assert tree.fallen == True
 
     def test_height(self):
@@ -179,7 +179,7 @@ class TestTree:
         assert tree.world == world1
         
         assert tree.height == 0
-        tree.setHeight=5
+        tree.height=5
         assert tree.height == 5
 
     def test_birth(self):
