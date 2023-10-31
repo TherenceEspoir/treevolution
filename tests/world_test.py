@@ -49,3 +49,5 @@ class TestWorld:
         for tree in list_of_tree:
             assert tree._age == 2
 
+        #vérifiez la suppression d’un arbre une fois son âge maximal atteint et sa transition en état humus effectuée
+        

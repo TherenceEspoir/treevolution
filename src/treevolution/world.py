@@ -44,9 +44,11 @@ class World():
 
         for tree in self._list_of_tree:
             tree.evolve(context)
-            tree._age= relativedelta(self._start_date ,tree._birth).years
-
-        
+            tree.age= relativedelta(self._start_date ,tree._birth).years
+            #lorsqu’un arbre est consumé, il est supprimé de la représentation du monde
+            if tree.consumed==True :
+                self._list_of_tree.remove(tree)
+  
         self._weather = weather
         return (self._start_date, weather, self.list_of_tree)
         

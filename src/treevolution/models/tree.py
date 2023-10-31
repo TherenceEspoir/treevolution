@@ -33,7 +33,7 @@ class Tree():
             return state.TreeState.HUMUS
         else:
             return state.TreeState.TREE
-
+  
     @property
     def coordinate(self):
         """
@@ -89,6 +89,14 @@ class Tree():
         Getter for days_in_humus
         """
         return self._days_in_humus
+    
+    @days_in_humus.setter
+    def days_in_humus(self, days_in_humus):
+        """
+        Setter for days_in_humus
+        """
+        self._days_in_humus = days_in_humus
+        
     
     @property
     def nutrient(self):
@@ -155,10 +163,33 @@ class Tree():
         if self.state == state.TreeState.HUMUS:
             self.fallen = True
             return
+        #lorsqu’un arbre a atteint son âge maximal, il chute et devient de l’humus
+
+        if self.age >= self.max_age:    
+            state.TreeState.HUMUS
+            self.fallen = True
+            #nombre de jour de humus disponible humus = width *height**2
+            self.days_in_humus = self.width * self.height**2
+        #De manière commune à tous les arbres, le nombre de jours en état humus est décompté de jour en jour, mais ne peut pas être inférieur à 0
+        if self.days_in_humus is not None:
+            self._days_in_humus -= 1
+            if self.days_in_humus < 0:
+                self.days_in_humus = 0   
+
+    #méthode consumed qui permet de savoir si un arbre à été consumé
+    def consumed(self):
+        """
+        Method consumed
+        """
+        #considéré comme consumé seulement s’il est fallen et le nombre de jour en stade humus a été atteint ou dépassé
+        if ((self.fallen==True) and (self.days_in_humus == 0)):
+            return True
+        else:
+            return False
 
     def __str__(self):
         """
         Method __str__
         """
-        return f"-- (name : {self.specie}, height : {self.height}, width : {self.width}, coordinate : {self.coordinate.__str__()}, health : {self.health},nutrient : {self.nutrient}, age : {self.age}, max_age : {self.max_age}, humus_day : {self.days_in_humus} )"
+        return f"-- (name : {self.specie}, height : {self.height}, width : {self.width}, coordinate : {self.coordinate.__str__()}, health : {self.health},nutrient : {self.nutrient}, age : {self.age}, max_age : {self.max_age}, humus_day : {self.days_in_humus} ,fallen : {self.fallen} )"
     
