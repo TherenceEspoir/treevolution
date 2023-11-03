@@ -8,6 +8,7 @@ from treevolution.base import Point
 from treevolution.models.tree import Tree
 from treevolution.models.trees.oak import Oak
 from dateutil.relativedelta import relativedelta
+import copy
 
 def main():
     """
@@ -31,16 +32,16 @@ def main():
 
     list_of_tree: List[Tree] = []
     dat=None
-    for _ in range(1000):
+    for _ in range(3000):
         
         #day, _, trees, seeds = world.step()
         day, _, trees = world.step()
-        list_of_tree=trees
+        list_of_tree=copy.copy(trees)
         dat=day
-    
+
     print(f"At {dat}:")
     for tree in list_of_tree:
-        print(tree)      
+        print(tree)          
 
 
 if __name__ == "__main__":
