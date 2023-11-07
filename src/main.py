@@ -25,14 +25,13 @@ def main():
     for _ in range(2):
         point = Point.random(w_world, h_world)
         tree = Oak(point, date_start, world)
-
         world.add_tree(tree)
 
     # simulate 1000 days    
 
     list_of_tree: List[Tree] = []
     dat=None
-    for _ in range(3000):
+    for _ in range(1000):
         
         #day, _, trees, seeds = world.step()
         day, _, trees = world.step()

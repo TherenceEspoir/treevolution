@@ -164,15 +164,13 @@ class Tree():
            # return
         #lorsqu’un arbre a atteint son âge maximal, il chute et devient de l’humus
 
-        if self.age >= self.max_age:    
+        if (self.age >= self.max_age) and (self.days_in_humus is None):    
             self.fallen = True
             #nombre de jour de humus disponible humus = width *height**2
             self.days_in_humus = self.width * self.height**2
-        #De manière commune à tous les arbres, le nombre de jours en état humus est décompté de jour en jour, mais ne peut pas être inférieur à 0
-        if self.days_in_humus is not None:
             self._days_in_humus -= 1
             if self.days_in_humus < 0:
-                self.days_in_humus = 0  
+                self.days_in_humus = 0
      
 
     #méthode consumed qui permet de savoir si un arbre à été consumé
