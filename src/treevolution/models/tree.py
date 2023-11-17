@@ -168,10 +168,11 @@ class Tree():
             self.fallen = True
             #nombre de jour de humus disponible humus = width *height**2
             self.days_in_humus = self.width * self.height**2
-            self._days_in_humus -= 1
             if self.days_in_humus < 0:
                 self.days_in_humus = 0
-     
+
+        if self.fallen == True:
+            self._days_in_humus -= 1
 
     #méthode consumed qui permet de savoir si un arbre à été consumé
     def consumed(self):
@@ -179,8 +180,8 @@ class Tree():
         Method consumed
         """
         #considéré comme consumé seulement s’il est fallen et le nombre de jour en stade humus a été atteint ou dépassé
-        print(f'fallen: {self.fallen}, days_in_humus: {self.days_in_humus}')
-        if (self.fallen) and (self.days_in_humus == 0):
+        #print(f'fallen: {self.fallen}, days_in_humus: {self.days_in_humus}')
+        if self.fallen==True and (self.days_in_humus <= 0):
             return True
         else:
             return False

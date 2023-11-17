@@ -46,7 +46,7 @@ class World():
             tree.evolve(context)
             tree.age= relativedelta(self._start_date ,tree._birth).years
             #lorsqu’un arbre est consumé, il est supprimé de la représentation du monde
-            if tree.consumed==True:
+            if tree.consumed()==True:
                 self._list_of_tree.remove(tree)
                
   

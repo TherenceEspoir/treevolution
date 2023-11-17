@@ -49,5 +49,28 @@ class TestWorld:
         for tree in list_of_tree:
             assert tree._age == 2
 
-        #vérifiez la suppression d’un arbre une fois son âge maximal atteint et sa transition en état humus effectuée
+    #Tester la suppression d'un arbre 
+    def test_consumed(self):
+        """Test the consumed method of World
+        """
+        w_world, h_world = 200, 200
+        date_test = datetime(2022,9, 10)
         
+        world = World(h_world, w_world, date_test)
+        for _ in range(2):
+            point = Point.random(w_world, h_world)
+            tree = Oak(point, date_test, world)
+
+        world.add_tree(tree)
+
+        list_of_tree: List[Tree] = []
+        dat=None
+        for _ in range(4000):
+            day, _, trees = world.step()
+            list_of_tree=trees
+            dat=day
+
+        assert dat == date_test + timedelta(days=4000)
+        assert list_of_tree.__len__() == 0
+
+
