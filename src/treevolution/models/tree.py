@@ -1,7 +1,8 @@
-
-# BEGIN: 7d4f5a3d5c8a
 from abc import abstractmethod
-
+from datetime import timedelta, datetime,date
+from dateutil.relativedelta import relativedelta
+from treevolution.context import Context
+from treevolution.models import state
 
 class Tree():
     """
@@ -22,6 +23,17 @@ class Tree():
         self._max_age = None
         self._days_in_humus = None
 
+
+    @property
+    def state(self):
+        """
+        Method property state
+        """
+        if self.age >= self.max_age:
+            return state.TreeState.HUMUS
+        else:
+            return state.TreeState.TREE
+  
     @property
     def coordinate(self):
         """
@@ -57,6 +69,13 @@ class Tree():
         """
         return self._age
     
+    @age.setter
+    def age(self, age):
+        """
+        Setter for age
+        """
+        self._age = age
+    
     @property
     def max_age(self):
         """
@@ -70,6 +89,14 @@ class Tree():
         Getter for days_in_humus
         """
         return self._days_in_humus
+    
+    @days_in_humus.setter
+    def days_in_humus(self, days_in_humus):
+        """
+        Setter for days_in_humus
+        """
+        self._days_in_humus = days_in_humus
+        
     
     @property
     def nutrient(self):
@@ -86,8 +113,9 @@ class Tree():
         """
         return self._fallen
 
+    
     @fallen.setter
-    def setFallen(self, fallen):
+    def fallen(self, fallen):
         """
         Setter for fallen
         """
@@ -102,13 +130,13 @@ class Tree():
     
 
     @height.setter
-    def setHeight(self, height):
+    def height(self, height):
         """
         Setter for height
         """
         self._height = height         
 
-    #property abstraites heath qui déterminera en fonction de plusieurs critères propres à l’espèce l’état de santé de l’arbre
+    #property abstraite heath qui déterminera en fonction de plusieurs critères propres à l’espèce l’état de santé de l’arbre
     @property
     @abstractmethod
     def health(self):
@@ -125,28 +153,42 @@ class Tree():
         """
         pass
     
-    #methode abstraite evolve
-    #cette méthode prend en paramètre un contexte d’environnement (définit dans context.context)
-
     @abstractmethod
-    def evolve(self, context):
+    def evolve(self,context: Context):
         """
         Abstract method evolve
         """
-        pass
+        
+        if self.state == state.TreeState.HUMUS:
+            self.fallen = True
+           # return
+        #lorsqu’un arbre a atteint son âge maximal, il chute et devient de l’humus
 
+        if (self.age >= self.max_age) and (self.days_in_humus is None):    
+            self.fallen = True
+            #nombre de jour de humus disponible humus = width *height**2
+            self.days_in_humus = self.width * self.height**2
+            if self.days_in_humus < 0:
+                self.days_in_humus = 0
 
-    #méthode __str__ pour proposer l’affichage d’une instance de la classe
+        if self.fallen == True:
+            self._days_in_humus -= 1
+
+    #méthode consumed qui permet de savoir si un arbre à été consumé
+    def consumed(self):
+        """
+        Method consumed
+        """
+        #considéré comme consumé seulement s’il est fallen et le nombre de jour en stade humus a été atteint ou dépassé
+        #print(f'fallen: {self.fallen}, days_in_humus: {self.days_in_humus}')
+        if self.fallen==True and (self.days_in_humus <= 0):
+            return True
+        else:
+            return False
+
     def __str__(self):
         """
         Method __str__
         """
-        return f"{self._specie} : {self._height}m, {self._age} years old, {self._nutrient} health, fallen : {self._fallen}" 
-
-
-       
-
-
-
-
+        return f"-- (name : {self.specie}, height : {self.height}, width : {self.width}, coordinate : {self.coordinate.__str__()}, health : {self.health},nutrient : {self.nutrient}, age : {self.age}, max_age : {self.max_age}, humus_day : {self.days_in_humus} ,fallen : {self.fallen} )"
     

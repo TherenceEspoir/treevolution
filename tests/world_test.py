@@ -2,8 +2,11 @@
 Test class for World class
 """
 from datetime import timedelta, datetime
-
+from treevolution.models.tree import Tree
+from treevolution.models.trees.oak import Oak
+from typing import List
 from treevolution.world import World
+from treevolution.base import Point
 
 class TestWorld:
     """TestWordl class in order to test World behavior
@@ -21,16 +24,53 @@ class TestWorld:
         assert world1._width == 80
         assert world1._start_date == date
 
-
-
     #Tester la méthode step
     def test_step(self):
         """Test the step method of World
         """
-        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        w_world, h_world = 200, 200
+        date_test = datetime(2022,9, 10)
         
-        world1 = World(100, 80, date)
+        world = World(h_world, w_world, date_test)
+        for _ in range(2):
+            point = Point.random(w_world, h_world)
+            tree = Oak(point, date_test, world)
+
+        world.add_tree(tree)
+
+        list_of_tree: List[Tree] = []
+        dat=None
+        for _ in range(1000):
+            day, _, trees = world.step()
+            list_of_tree=trees
+            dat=day
+
+        assert dat == date_test + timedelta(days=1000)
+        for tree in list_of_tree:
+            assert tree._age == 2
+
+    #Tester la suppression d'un arbre 
+    def test_consumed(self):
+        """Test the consumed method of World
+        """
+        w_world, h_world = 200, 200
+        date_test = datetime(2022,9, 10)
         
-        world1.step()
-         
-        assert world1.date == date + timedelta(days=1)
+        world = World(h_world, w_world, date_test)
+        for _ in range(2):
+            point = Point.random(w_world, h_world)
+            tree = Oak(point, date_test, world)
+
+        world.add_tree(tree)
+
+        list_of_tree: List[Tree] = []
+        dat=None
+        for _ in range(4000):
+            day, _, trees = world.step()
+            list_of_tree=trees
+            dat=day
+
+        assert dat == date_test + timedelta(days=4000)
+        assert list_of_tree.__len__() == 0
+
+

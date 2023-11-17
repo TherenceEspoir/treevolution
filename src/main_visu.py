@@ -9,7 +9,7 @@ import tkinter as tk
 from treevolution import World
 from treevolution.context import Season
 from treevolution.base import Point
-from treevolution.models.trees import Oak
+from treevolution.models.trees.oak import Oak
 from treevolution.models import TreeState
 
 # some world parameters
