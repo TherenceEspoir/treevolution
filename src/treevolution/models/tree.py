@@ -105,6 +105,13 @@ class Tree():
         """
         return self._nutrient
     
+    @nutrient.setter
+    def nutrient(self, nutrient):
+        """
+        Getter for nutrient
+        """
+        self._nutrient = nutrient
+    
 
     @property
     def fallen(self):
