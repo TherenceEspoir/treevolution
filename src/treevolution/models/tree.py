@@ -21,7 +21,7 @@ class Tree():
         self._fallen = False
         self._age = 0
         self._max_age = None
-        self._days_in_humus = None
+        self._days_in_humus = 0
 
 
     @property

@@ -4,7 +4,10 @@ from treevolution.models.tree import Tree
 from treevolution.context import Context
 from datetime import timedelta, datetime
 from datetime import date
+
 from dateutil.relativedelta import relativedelta
+
+from treevolution.context.weather import Weather
 
 import datetime
 """
@@ -36,15 +39,22 @@ class World():
         self._start_date = self._start_date + timedelta(days=1)
 
         random.seed(42)
-        weather_options = ["ensoleillé", "nuageux", "pluvieux", "neige", "orage"]
 
-        weather = random.choice(weather_options)
+        #propose un Weather en te basant sur la classe Weather et son constructeur
 
-        context = Context(weather,None,10)
+
+        #weather_options = ["ensoleillé", "nuageux", "pluvieux", "neige", "orage"]
+
+        #weather = random.choice(weather_options)
+
+        weather = Weather.random(date.today())
+
+        context = Context(weather,10,0)
 
         for tree in self._list_of_tree:
             tree.evolve(context)
             tree.age= relativedelta(self._start_date ,tree._birth).years
+        
             #lorsqu’un arbre est consumé, il est supprimé de la représentation du monde
             if tree.consumed()==True:
                 self._list_of_tree.remove(tree)
