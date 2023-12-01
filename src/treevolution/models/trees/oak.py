@@ -18,7 +18,7 @@ class Oak(Tree):
     def __init__(self, coordinate, birth, world):
         super().__init__(coordinate, birth, world)
         self._max_age = random.uniform(Oak.MIN_AGE,Oak.MAX_AGE)
-        self._height = random.uniform(Oak.MIN_HEIGHT,Oak.MAX_HEIGHT)
+        self.max_height = random.uniform(Oak.MIN_HEIGHT,Oak.MAX_HEIGHT)
         
     def evolve(self,context : Context):
         """
@@ -29,11 +29,12 @@ class Oak(Tree):
         if self.state == state.TreeState.HUMUS:
             return
         else:
-            if self.height < self.MAX_HEIGHT:
-                self.height=self.height + 0.005* self.youth_ratio
+            if self.height < self.max_height:
+                self.height=self.height + (0.005* self.youth_ratio)
                 self.nutrient = self.nutrient - 0.2
                 self.nutrient= self.nutrient + context.weather.humidity
-                self.days_in_humus=self.days_in_humus * context.weather.humidity
+                self.nutrient= self.nutrient+( context.humus * context.weather.humidity)
+                #self.days_in_humus=self.days_in_humus * context.weather.humidity
                 #bornons la valeur de nutritions entre 0 et 100
                 if self.nutrient < 0:
                     self.nutrient = 0

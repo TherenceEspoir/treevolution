@@ -2,6 +2,7 @@
 Module which enables to simulate a world
 """
 from datetime import date, datetime
+import random
 from typing import List
 from treevolution import World
 from treevolution.base import Point
@@ -29,6 +30,8 @@ def main():
     date_start = datetime(2022,9, 10) 
 
     world = World(h_world, w_world, date_start)
+
+    random.seed(42)
 
     # create trees
     for _ in range(5):

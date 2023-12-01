@@ -36,6 +36,7 @@ class World():
         """
         Method qui avance la date d'un jour et simule l'ensemble des arbres
         """
+
         self._start_date = self._start_date + timedelta(days=1)
 
         random.seed(42)
@@ -43,12 +44,10 @@ class World():
         #propose un Weather en te basant sur la classe Weather et son constructeur
 
 
-        #weather_options = ["ensoleillé", "nuageux", "pluvieux", "neige", "orage"]
 
-        #weather = random.choice(weather_options)
 
-        weather = Weather.random(date.today())
-
+        #weather = Weather.random(date.today())
+        weather = Weather.random(self._start_date)
         context = Context(weather,10,0)
 
         for tree in self._list_of_tree:
