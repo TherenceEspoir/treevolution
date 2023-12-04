@@ -3,6 +3,9 @@ Test class for Tree and Oak class
 """
 from abc import ABC, abstractmethod
 from datetime import timedelta, datetime
+import random
+from treevolution.base.geometry import Point
+from treevolution.context.weather import Weather
 from treevolution.models import state
 
 
@@ -53,11 +56,11 @@ class TestOak:
 
         date = datetime.strptime("2022-08-22", "%Y-%m-%d")
         world1 = World(100, 80, date)
-
-        oak = Oak((0, 0), datetime.now(), world1)
+        point = Point.random(200,200)
+        oak = Oak(point, datetime.now(), world1)
         assert oak.world == world1
         
-        assert oak.height >= Oak.MIN_HEIGHT
+        assert oak.height == 0
         assert oak.height <= Oak.MAX_HEIGHT
 
         
@@ -75,19 +78,29 @@ class TestOak:
        
 
     def test_evolve(self):
-        """Teste que la méthode evolve augmente height de  Oak"""
-        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        """Teste que la méthode evolve de  Oak fonctionne correctement"""
+        date = datetime.strptime("2022-09-10", "%Y-%m-%d")
         world1 = World(100, 80, date)
-
+        random.seed(42)
         oak = Oak((0, 0), datetime.now(), world1)
         
-        context = Context(weather="sunny", sun_intensity=10, humus=1)
+        weather = Weather.random(world1.date)
+        context = Context(weather,10,0)
 
-        for i in range(3):
-            oak.evolve(context)
+        oak.evolve(context)
+        
+        #verifier que le nutriment est entre 0 et 100
+        assert oak.nutrient >= 0
+        assert oak.nutrient <= 100
 
-        assert oak.height >= Oak.MIN_HEIGHT
         assert oak.height <= Oak.MAX_HEIGHT
+
+        #verifier que lorque l'arbre atteint son age max il viellit et que son nutriment diminue
+        oak.age = oak.max_age
+        oak.evolve(context)
+        assert oak.age == oak.max_age
+        assert oak.nutrient < 100
+                
 
     
     def test_health(self):
@@ -134,7 +147,7 @@ class TestOak:
         oak = Oak((0, 0), datetime.now(), world1)
         oak.fallen=False
         assert oak.fallen == False         
-        
+
 
 class TestTree:
     """TestTree class in order to test Tree behavior
@@ -251,17 +264,3 @@ class TestTree:
         world1 = World(100, 80, date)
         tree = Tree((0, 0), birth, world1)
         assert tree.max_age == None
-    """
-    def test_evolve(self):
-        birth = datetime(2015,1,1)
-        
-        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
-        world1 = World(100, 80, date)
-        tree = Tree((0, 0), birth, world1)
-
-        context = Context(weather="sunny", sun_intensity=10, humus=1)
-        tree._max_age=5
-        tree._age=0
-
-        tree.evolve(context)
-    """

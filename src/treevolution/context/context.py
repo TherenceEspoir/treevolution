@@ -1,3 +1,4 @@
+from treevolution.context.weather import Weather
 """
 Module context which contains Context class for tree growth
 """
@@ -7,7 +8,7 @@ class Context():
     Context class which describes the growth context for the tree
     """
 
-    def __init__(self, weather, sun_intensity, humus):
+    def __init__(self, weather :Weather , sun_intensity, humus):
         # pylint: disable=line-too-long
         """
         Context constructor
