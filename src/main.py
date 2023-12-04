@@ -27,11 +27,11 @@ def main():
     w_world, h_world = 200, 200
 
     current_date = date.today()
+    random.seed(42)
+
     date_start = datetime(2022,9, 10) 
 
     world = World(h_world, w_world, date_start)
-
-    random.seed(42)
 
     # create trees
     for _ in range(5):
