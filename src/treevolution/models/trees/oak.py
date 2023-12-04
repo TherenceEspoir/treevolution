@@ -34,8 +34,6 @@ class Oak(Tree):
             self.nutrient = self.nutrient - 0.2
             self.nutrient= self.nutrient + context.weather.humidity
             self.nutrient= self.nutrient+( context.humus * context.weather.humidity)
-            #self.days_in_humus=self.days_in_humus * context.weather.humidity
-            #bornons la valeur de nutritions entre 0 et 100
             if self.nutrient < 0:
                 self.nutrient = 0
             elif self.nutrient > 100:
@@ -56,9 +54,7 @@ class Oak(Tree):
         Method width
         """
         return self.height * 0.08
-    
-
-    
+        
     @property
     def youth_ratio(self):
         """
