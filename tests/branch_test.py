@@ -16,7 +16,7 @@ class TestOakBranch:
     def test_constructor(self):
         """Test the constructor method of OakBranch
         """
-        
+
         random.seed(42)
         hauteur= 5
         angle= 90
@@ -38,6 +38,8 @@ class TestOakBranch:
         assert OakBranch.MAX_LENGTH == 2.5
 
         branche=  OakBranch(hauteur, angle, date_start, arbre, etat, longueur)
+        assert branche.angle == angle
+        assert branche.birth == date_start
 
         #verifier que la densité de feuillage est bien compise dans l'intervalle de min et max
         assert OakBranch.MIN_LEAVES_DENSITY <= branche._density <= OakBranch.MAX_LEAVES_DENSITY
@@ -79,3 +81,19 @@ class TestOakBranch:
         branche.evolve(context)
 
         assert branche.length == longueur +(0.005 * arbre.youth_ratio * branche.hratio)
+
+    def test_state(self):
+        """ Test the state method of OakBranch """
+        hauteur= 5
+        angle= 90
+        date_start= datetime(2022,9, 10)
+
+        world = World(200, 200, date_start)
+        arbre= Oak(Point(0,0), date_start, world)
+
+        etat= BranchState.EVOLVE
+        longueur= 0
+
+        branche=  OakBranch(hauteur, angle, date_start, arbre, etat, longueur)
+
+        assert branche.state == etat
