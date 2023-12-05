@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 
+from treevolution.models.tree import Tree
+
 class Branch(ABC):
-    def __init__(self,height,angle,birth,tree,state,length):
+    def __init__(self,height,angle,birth,tree:Tree,state,length):
         self._height= height
         self._angle= angle
         self._birth= birth

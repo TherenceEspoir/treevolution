@@ -16,20 +16,7 @@ class TestOakBranch:
     def test_constructor(self):
         """Test the constructor method of OakBranch
         """
-
-        """
-        — Une hauteur (height), qui détermine son emplacement sur le tronc de l’arbre.
-        — Un angle de position sur le tronc, déterminant son orientation.
-        — Une date de naissance (birth).
-        — L’instance d’arbre associée.
-        — Un état de type models.state.BranchState par défaut fixé à EVOLVE.
-        — Une longueur (length), qui définit sa taille (par défaut fixée à 0).
-        — Une longueur maximale (max_length) fixée à None pour le moment.
-        — Une densité de feuillage (density) fixée à 0 également.
-        — Une méthode evolve abstraite qui déterminera par la suite comment évolue la branche. Cette
-        méthode prend en paramètre un contexte tout comme pour l’évolution d’un arbre.
-        """
-
+        
         random.seed(42)
         hauteur= 5
         angle= 90
@@ -50,19 +37,45 @@ class TestOakBranch:
         assert OakBranch.MIN_LENGTH == 1
         assert OakBranch.MAX_LENGTH == 2.5
 
-
         branche=  OakBranch(hauteur, angle, date_start, arbre, etat, longueur)
-        
+
         #verifier que la densité de feuillage est bien compise dans l'intervalle de min et max
         assert OakBranch.MIN_LEAVES_DENSITY <= branche._density <= OakBranch.MAX_LEAVES_DENSITY
 
         #verifier que la longueur est bien compise dans l'intervalle de min et max
         assert OakBranch.MIN_LENGTH <= branche._max_length <= OakBranch.MAX_LENGTH
 
-        assert branche.height == hauteur
-        assert branche._angle == angle
-        assert branche._birth == date_start
-        assert branche._tree == arbre
-        assert branche._state == etat
-        assert branche._length == longueur
-        
+        branche.height= 20
+        assert branche.height == 20
+        assert branche.angle == angle
+        assert branche.birth == date_start
+        assert branche.tree == arbre
+        assert branche.state == etat
+        assert branche.length == longueur
+
+
+    def test_evolve(self):
+        """ Test the evolve method of OakBranch """
+        hauteur= 5
+        angle= 90
+        date_start= datetime(2022,9, 10)
+
+        world = World(200, 200, date_start)
+        arbre= Oak(Point(0,0), date_start, world)
+
+        etat= BranchState.EVOLVE
+        longueur= 0
+
+        branche=  OakBranch(hauteur, angle, date_start, arbre, etat, longueur)
+
+        weather= Weather.random(date_start)
+        context= Context(weather,10,0)
+
+        arbre.evolve(context)
+
+        x= 1 - (branche.height / arbre.height)
+        assert branche.hratio == x
+
+        branche.evolve(context)
+
+        assert branche.length == longueur +(0.005 * arbre.youth_ratio * branche.hratio)
