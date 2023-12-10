@@ -37,7 +37,7 @@ class TestOakBranch:
         assert OakBranch.MIN_LENGTH == 1
         assert OakBranch.MAX_LENGTH == 2.5
 
-        branche=  OakBranch(hauteur, angle, date_start, arbre, etat, longueur)
+        branche=  OakBranch(hauteur, angle, date_start, arbre,longueur)
         assert branche.angle == angle
         assert branche.birth == date_start
 
@@ -65,10 +65,9 @@ class TestOakBranch:
         world = World(200, 200, date_start)
         arbre= Oak(Point(0,0), date_start, world)
 
-        etat= BranchState.EVOLVE
         longueur= 0
 
-        branche=  OakBranch(hauteur, angle, date_start, arbre, etat, longueur)
+        branche=  OakBranch(hauteur, angle, date_start, arbre, longueur)
 
         weather= Weather.random(date_start)
         context= Context(weather,10,0)
@@ -90,10 +89,9 @@ class TestOakBranch:
 
         world = World(200, 200, date_start)
         arbre= Oak(Point(0,0), date_start, world)
-
         etat= BranchState.EVOLVE
         longueur= 0
 
-        branche=  OakBranch(hauteur, angle, date_start, arbre, etat, longueur)
+        branche=  OakBranch(hauteur, angle, date_start, arbre,longueur)
 
         assert branche.state == etat

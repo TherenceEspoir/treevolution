@@ -75,10 +75,10 @@ class Oak(Tree):
         probabilite = 0.02
 
         if nombre_random <= probabilite :
-            if context.energy == 0.2 and self.health > 50:
+            if context.energy > 0.2 and self.health > 50:
                 height = random.uniform(self.height * Oak.PERCENT_BEFORE_BRANCH ,self.height)
                 angle = random.uniform(0,360)
-                branch = OakBranch(height, angle, self.birth, self, state.BranchState.EVOLVE, 0)
+                branch = OakBranch(height, angle, self.birth, self, 0)
                 self.nutrient -= 5
                 self.add_branch(branch)
                 return branch

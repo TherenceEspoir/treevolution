@@ -14,11 +14,11 @@ class OakBranch(Branch):
     MAX_LENGTH =2.5
 
 
-    def __init__(self,height,angle,birth,tree:Tree,state,length):
+    def __init__(self,height,angle,birth,tree:Tree,length):
         """
         Constructor of OakBranch class
         """
-        super().__init__(height,angle,birth,tree,state,length)
+        super().__init__(height,angle,birth,tree,length)
         self._density= random.uniform(OakBranch.MIN_LEAVES_DENSITY, OakBranch.MAX_LEAVES_DENSITY)
         self._max_length= random.uniform(OakBranch.MIN_LENGTH, OakBranch.MAX_LENGTH)
 
