@@ -4,6 +4,7 @@ from dateutil.relativedelta import relativedelta
 from treevolution.context import Context
 from treevolution.models import state
 
+
 class Tree():
     """
     Tree class in order to represent a tree
@@ -22,7 +23,22 @@ class Tree():
         self._age = 0
         self._max_age = None
         self._days_in_humus = None
+        self._branches = []
 
+
+    @property
+    def branches(self):
+        """
+        Getter for branches
+        """
+        return self._branches
+    
+    @branches.setter
+    def branches(self, branches):
+        """
+        Setter for branches
+        """
+        self._branches = branches
 
     @property
     def state(self):
@@ -141,7 +157,14 @@ class Tree():
         """
         Setter for height
         """
-        self._height = height         
+        self._height = height      
+
+  
+    def add_branch(self, branch):
+        """
+        Method add_branch
+        """
+        self._branches.append(branch)       
 
     #property abstraite heath qui déterminera en fonction de plusieurs critères propres à l’espèce l’état de santé de l’arbre
     @property
@@ -198,4 +221,6 @@ class Tree():
         Method __str__
         """
         return f"-- (name : {self.specie}, height : {self.height}, width : {self.width}, coordinate : {self.coordinate.__str__()}, health : {self.health},nutrient : {self.nutrient}, age : {self.age}, max_age : {self.max_age}, humus_day : {self.days_in_humus} ,fallen : {self.fallen} )"
+    
+
     

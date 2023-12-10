@@ -17,7 +17,7 @@ def main():
     """
 
     """
-            À ce stade, si vous simulez une forêt de 5 arbres avec le contexte suivant :
+        À ce stade, si vous simulez une forêt de 5 arbres avec le contexte suivant :
         — La graine aléatoire fixée à 42.
         — Une date de départ fixée à « 2022-09-10 ».
         — Un monde de taille 200 ˆ 200.

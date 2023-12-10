@@ -6,13 +6,14 @@ from datetime import timedelta, datetime
 import random
 from treevolution.base.geometry import Point
 from treevolution.context.weather import Weather
-from treevolution.models import state
+from treevolution.models.state import BranchState
 
 
 from treevolution.models.tree import Tree
 from treevolution.context import Context
 from treevolution.models.trees.oak import Oak
 from treevolution.world import World
+from treevolution.models.branch.branch import Branch
 
 class TestOak:
     """TestOak class in order to test Oak behavior
@@ -264,3 +265,18 @@ class TestTree:
         world1 = World(100, 80, date)
         tree = Tree((0, 0), birth, world1)
         assert tree.max_age == None
+
+    def test_branches(self):
+        """Test the branches property """
+
+        random.seed(42)
+        hauteur= 5
+        angle= 90
+        date_start= datetime(2022,9, 10)
+
+        world = World(200, 200, date_start)
+        arbreOak= Oak(Point(0,0), date_start, world)
+
+        assert arbreOak.branches == []
+
+        x = arbreOak.createBranchesOak()
