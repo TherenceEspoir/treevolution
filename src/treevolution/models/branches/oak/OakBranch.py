@@ -14,11 +14,11 @@ class OakBranch(Branch):
     MAX_LENGTH =2.5
 
 
-    def __init__(self,height,angle,birth,tree:Tree,length):
+    def __init__(self,height,angle,birth,tree:Tree):
         """
         Constructor of OakBranch class
         """
-        super().__init__(height,angle,birth,tree,length)
+        super().__init__(height,angle,birth,tree)
         self._density= random.uniform(OakBranch.MIN_LEAVES_DENSITY, OakBranch.MAX_LEAVES_DENSITY)
         self._max_length= random.uniform(OakBranch.MIN_LENGTH, OakBranch.MAX_LENGTH)
 
@@ -97,3 +97,10 @@ class OakBranch(Branch):
         Method evolve qui fait évoluer la branche
         """
         self._length += 0.005 * self.tree.youth_ratio * self.hratio
+
+    #methode str pour afficher les informations de la branche
+    def __str__(self):
+        """
+        Method str
+        """
+        return "Branch: height = " + str(self.height) + " angle = " + str(self.angle) + " birth = " + str(self.birth) + " tree = " + str(self.tree) + " state = " + str(self.state) + " length = " + str(self.length) + " max_length = " + str(self.max_length) + " density = " + str(self.density) + " hratio = " + str(self.hratio)    

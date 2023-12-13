@@ -265,18 +265,3 @@ class TestTree:
         world1 = World(100, 80, date)
         tree = Tree((0, 0), birth, world1)
         assert tree.max_age == None
-
-    def test_branches(self):
-        """Test the branches property """
-
-        random.seed(42)
-        hauteur= 5
-        angle= 90
-        date_start= datetime(2022,9, 10)
-
-        world = World(200, 200, date_start)
-        arbreOak= Oak(Point(0,0), date_start, world)
-
-        assert arbreOak.branches == []
-
-        x = arbreOak.createBranchesOak()

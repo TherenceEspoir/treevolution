@@ -40,8 +40,21 @@ class Oak(Tree):
                 self.nutrient = 0
             elif self.nutrient > 100:
                 self.nutrient = 100
-                
 
+            #nombre aléatoire entre 0 et 1 (inclus)
+            nombre_random = random.uniform(0, 1)
+
+            #probabilité souhaitée (2% , soit 0.02)
+            probabilite = 0.02
+
+            if nombre_random <= probabilite :
+                if context.energy > 0.2 and self.health > 50:
+                    height = random.uniform(self.height * Oak.PERCENT_BEFORE_BRANCH ,self.height)
+                    angle = random.uniform(0,360)
+                    branch = OakBranch(height, angle, self.birth, self)
+                    self.nutrient -= 5
+                    self.add_branch(branch)
+                                    
     @property
     def health(self):
         """
@@ -64,23 +77,3 @@ class Oak(Tree):
         """
         return 1-(self.age /self.max_age)
     
-    def createBrancheOak(self,context : Context):
-        """
-        Method createBranchesOak qui crée une branche d’un arbre oak
-        """
-        #nombre aléatoire entre 0 et 1 (inclus)
-        nombre_random = random.uniform(0, 1)
-
-        #probabilité souhaitée (2% , soit 0.02)
-        probabilite = 0.02
-
-        if nombre_random <= probabilite :
-            if context.energy > 0.2 and self.health > 50:
-                height = random.uniform(self.height * Oak.PERCENT_BEFORE_BRANCH ,self.height)
-                angle = random.uniform(0,360)
-                branch = OakBranch(height, angle, self.birth, self, 0)
-                self.nutrient -= 5
-                self.add_branch(branch)
-                return branch
-            return None
-        return None

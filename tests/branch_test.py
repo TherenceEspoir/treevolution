@@ -25,7 +25,7 @@ class TestOakBranch:
         world = World(200, 200, date_start)
         arbre= Oak(Point(0,0), date_start, world)
         etat= BranchState.EVOLVE
-        longueur= 0
+        
         longueur_max= None
         #densite= 0
 
@@ -37,7 +37,7 @@ class TestOakBranch:
         assert OakBranch.MIN_LENGTH == 1
         assert OakBranch.MAX_LENGTH == 2.5
 
-        branche=  OakBranch(hauteur, angle, date_start, arbre,longueur)
+        branche=  OakBranch(hauteur, angle, date_start, arbre)
         assert branche.angle == angle
         assert branche.birth == date_start
 
@@ -53,7 +53,7 @@ class TestOakBranch:
         assert branche.birth == date_start
         assert branche.tree == arbre
         assert branche.state == etat
-        assert branche.length == longueur
+        assert branche.length == 0
 
 
     def test_evolve(self):
@@ -67,7 +67,7 @@ class TestOakBranch:
 
         longueur= 0
 
-        branche=  OakBranch(hauteur, angle, date_start, arbre, longueur)
+        branche=  OakBranch(hauteur, angle, date_start, arbre)
 
         weather= Weather.random(date_start)
         context= Context(weather,10,0)
@@ -92,6 +92,37 @@ class TestOakBranch:
         etat= BranchState.EVOLVE
         longueur= 0
 
-        branche=  OakBranch(hauteur, angle, date_start, arbre,longueur)
+        branche=  OakBranch(hauteur, angle, date_start, arbre)
 
         assert branche.state == etat
+
+    #tester à nouveau step de world
+    def test_step(self):
+        """Test the step method of World
+        """
+        w_world, h_world = 200, 200
+        date_test = datetime(2022,9, 10)
+        
+
+        world = World(h_world, w_world, date_test)
+        for _ in range(5):
+            point = Point.random(w_world, h_world)
+            tree = Oak(point, date_test, world)
+            world.add_tree(tree)
+
+
+        #verifier qu'avant la simulation, aucun arbre n'a de branches
+        for tree in world.list_of_tree:
+            assert tree._branches.__len__() == 0
+
+
+        list_of_tree= []
+        dat=None
+        for _ in range(1000):
+            day, _, trees = world.step()
+            list_of_tree=trees
+            dat=day
+
+        #verifier qu'àprès la simulation de 1000 jours, certains arbres ont des branches
+        for tree in list_of_tree:
+            assert tree._branches.__len__() > 0    

@@ -215,12 +215,17 @@ class Tree():
             return True
         else:
             return False
+        
+        
 
     def __str__(self):
         """
         Method __str__
         """
         return f"-- (name : {self.specie}, height : {self.height}, width : {self.width}, coordinate : {self.coordinate.__str__()}, health : {self.health},nutrient : {self.nutrient}, age : {self.age}, max_age : {self.max_age}, humus_day : {self.days_in_humus} ,fallen : {self.fallen} )"
+    
+
+        
     
 
     
