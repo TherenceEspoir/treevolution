@@ -265,3 +265,12 @@ class TestTree:
         world1 = World(100, 80, date)
         tree = Tree((0, 0), birth, world1)
         assert tree.max_age == None
+
+    def test_radius(self):
+        """Test the radius property """
+
+        birth = datetime.now()
+        date = datetime.strptime("2022-08-22", "%Y-%m-%d")
+        world1 = World(100, 80, date)
+        tree = Tree((0, 0), birth, world1)
+        x=tree.radius

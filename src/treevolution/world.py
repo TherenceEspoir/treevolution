@@ -4,6 +4,7 @@ from treevolution.models.tree import Tree
 from treevolution.context import Context
 from datetime import timedelta, datetime
 from datetime import date
+from treevolution.base.geometry import Point
 
 from dateutil.relativedelta import relativedelta
 
@@ -40,9 +41,16 @@ class World():
         weather = Weather.random(self._start_date)
         self._start_date = self._start_date + timedelta(days=1)
         context = Context(weather,10,0)
-
+        
         for tree in self._list_of_tree:
+            for tree2 in self._list_of_tree:
+                if tree2 != tree:
+                    if Point.is_inside_circle(tree.coordinate, tree2.radius):
+                        if tree2.state == "HUMUS":
+                            context.humus += 1
+                        
             tree.evolve(context)
+            tree.context = context
             tree.age= relativedelta(self._start_date ,tree._birth).years
         
             #lorsqu’un arbre est consumé, il est supprimé de la représentation du monde

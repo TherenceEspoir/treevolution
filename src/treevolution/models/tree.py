@@ -24,7 +24,21 @@ class Tree():
         self._max_age = None
         self._days_in_humus = None
         self._branches = []
+        self._context = None
 
+    @property
+    def context(self):
+        """
+        Getter for context
+        """
+        return self._context
+    
+    @context.setter
+    def context(self, context):
+        """
+        Setter for context
+        """
+        self._context = context
 
     @property
     def branches(self):
@@ -104,7 +118,7 @@ class Tree():
         """
         Getter for days_in_humus
         """
-        return self._days_in_humus
+        return self.width * self.height**2 * len(self.branches)
     
     @days_in_humus.setter
     def days_in_humus(self, days_in_humus):
@@ -215,7 +229,17 @@ class Tree():
             return True
         else:
             return False
+
+    def radius(self):
+        """
+        Method radius
+        """
+        if len(self.branches) == 0:
+            return 0
+        else:
+            return max(self.branches, key=lambda branch: branch.height).length
         
+            
         
 
     def __str__(self):
