@@ -22,7 +22,7 @@ class Tree():
         self._fallen = False
         self._age = 0
         self._max_age = None
-        self._days_in_humus = None
+        self._days_in_humus = 0
         self._branches = []
         self._context = None
 
@@ -229,7 +229,8 @@ class Tree():
             return True
         else:
             return False
-
+        
+    @property
     def radius(self):
         """
         Method radius
@@ -237,16 +238,16 @@ class Tree():
         if len(self.branches) == 0:
             return 0
         else:
-            return max(self.branches, key=lambda branch: branch.height).length
+            return max(self.branches, key=lambda branch: branch.height).height
         
-            
+ 
         
 
     def __str__(self):
         """
         Method __str__
         """
-        return f"-- (name : {self.specie}, height : {self.height}, width : {self.width}, coordinate : {self.coordinate.__str__()}, health : {self.health},nutrient : {self.nutrient}, age : {self.age}, max_age : {self.max_age}, humus_day : {self.days_in_humus} ,fallen : {self.fallen} )"
+        return f"-- (name : {self.specie}, radius :{self.radius}, height : {self.height}, width : {self.width}, coordinate : {self.coordinate.__str__()}, health : {self.health},nutrient : {self.nutrient}, age : {self.age}, max_age : {self.max_age}, humus_day : {self.days_in_humus} ,fallen : {self.fallen} )"
     
 
         

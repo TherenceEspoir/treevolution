@@ -5,6 +5,7 @@ from treevolution.context import Context
 from datetime import timedelta, datetime
 from datetime import date
 from treevolution.base.geometry import Point
+from treevolution.models import state
 
 from dateutil.relativedelta import relativedelta
 
@@ -45,8 +46,9 @@ class World():
         for tree in self._list_of_tree:
             for tree2 in self._list_of_tree:
                 if tree2 != tree:
-                    if Point.is_inside_circle(tree.coordinate, tree2.radius):
-                        if tree2.state == "HUMUS":
+                    coordonnee= Point(tree.coordinate.x, tree.coordinate.y)
+                    if coordonnee.is_inside_circle(Point(tree2.coordinate.x,tree2.coordinate.y), tree2.radius):
+                        if tree2.state == state.TreeState.HUMUS:
                             context.humus += 1
                         
             tree.evolve(context)

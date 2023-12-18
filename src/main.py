@@ -43,7 +43,7 @@ def main():
 
     list_of_tree: List[Tree] = []
     dat=None
-    for i in range(1,3001):
+    for i in range(1,1001):
         
         day, _, trees = world.step()
         list_of_tree=copy.copy(trees)

@@ -13,3 +13,7 @@ class Branch(ABC):
         self._length = 0
         self._max_length= None
         self._density= 0
+
+
+    def __str__(self):
+        return f"Branch(height={self.height}, angle={self.angle}, birth={self.birth}, state={self.state}, length={self.length}, max_length={self.max_length}, density={self.density})"

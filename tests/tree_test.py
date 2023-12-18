@@ -274,3 +274,24 @@ class TestTree:
         world1 = World(100, 80, date)
         tree = Tree((0, 0), birth, world1)
         x=tree.radius
+
+    def test_envergure(self):
+        """Test the envergure  """
+
+        w_world, h_world = 200, 200
+        date_test = datetime(2022,9, 10)
+        
+        world = World(h_world, w_world, date_test)
+        for _ in range(5):
+            point = Point.random(w_world, h_world)
+            tree = Oak(point, date_test, world)
+            world.add_tree(tree)
+
+        list_of_tree= []
+        dat=None
+        for _ in range(1000):
+            day, _, trees = world.step()
+            list_of_tree=trees
+            dat=day 
+
+        
